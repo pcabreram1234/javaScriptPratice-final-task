@@ -1,30 +1,72 @@
-import React from "react"
-import addUserIcon from "../assets/images/Add user.png"
-import "../styles/AddUser.css"
+import React from "react";
+import addUserIcon from "../assets/images/Add user.png";
+import Contries from "../json/contries.json";
+import "../styles/AddUser.css";
 
-const AddUser = () => {
-    return (
-        <div className="AddUser--container">
-            <div className="mainContainer">
-                <div className="col">
-                    <input type="text" placeholder="Nombre..." />
-                    <input type="text" placeholder="País..." />
-                    <select name="" id="">
-                        <option value="">Estudiante</option>
-                        <option value="">Desarrollador Web</option>
-                        <option value="">Maestro</option>
-                        <option value="">Arquitecto</option>
-                        <option value="">Doctor</option>
-                        <option value="">Policía</option>
-                    </select>
-                </div>
+const AddUser = ({ handleUserName, handleCountry, handleProfesion }) => {
+  const contriesList = Contries;
 
-                <div className="col">
-                    <img src={addUserIcon} alt="" className="addUserIcon" />
-                </div>
-            </div>
+  const getUsername = (e) => {
+    return e;
+  };
+
+  const getContryName = (e) => {
+    return e;
+  };
+
+  return (
+    <div className="AddUser--container">
+      <div className="mainContainer">
+        <div className="col">
+          <input
+            type="text"
+            placeholde="Nombre..."
+            onChange={(e) => {
+              let data = e.currentTarget.value;
+              handleUserName(getUsername(data));
+            }}
+          />
+          <select
+            name=""
+            id=""
+            onChange={(e) => {
+              let data =
+                e.currentTarget.selectedOptions[0].innerHTML.toString();
+              handleCountry(getContryName(data));
+            }}
+          >
+            {contriesList.map((el) => {
+              return (
+                <option key={el.code} value={el.code}>
+                  {el.name}
+                </option>
+              );
+            })}
+          </select>
+          <select
+            name=""
+            id=""
+            onChange={(e) => {
+              let data =
+                e.currentTarget.selectedOptions[0].innerHTML.toString();
+              handleProfesion(getContryName(data));
+            }}
+          >
+            <option value="">Estudiante</option>
+            <option value="">Desarrollador Web</option>
+            <option value="">Maestro</option>
+            <option value="">Arquitecto</option>
+            <option value="">Doctor</option>
+            <option value="">Policía</option>
+          </select>
         </div>
-    )
-}
 
-export default AddUser
+        <div className="col">
+          <img src={addUserIcon} alt="" className="addUserIcon" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AddUser;

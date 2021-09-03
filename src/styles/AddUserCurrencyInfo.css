@@ -11,11 +11,12 @@
 
 .AddUserCurrencyInfo--maincontainer{
     margin-top: 20px;
-    margin-right: 30%;
+    margin-right: 30vh;
+    width: 100%;
 }
 
 .AddUserCurrencyInfo--imageIcon{
-    margin-top:75vh;
+    margin-top:487px;
     margin-left: 20vh;
     width: 120px;
     height: 120px;
@@ -24,14 +25,14 @@
 }
 
 .AddUserCurrencyInfo--col{
-    width: 65vh;
+    width: 380px;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
 .AddUserCurrencyInfo--input{
-    height: 10vh;
+    height: 8.5vh;
 }
 
 
