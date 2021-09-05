@@ -26,6 +26,14 @@ const App = () => {
     profesion === "" ? setProfesion([""]) : setProfesion(profesion);
   };
 
+  const handleSalary = (salary) => {
+    setSalary(salary);
+  };
+
+  const handleMedicare = (medicare) => {
+    setMedicare(medicare);
+  };
+
   return (
     <div onChange={console.log(userName)}>
       <AddUser
@@ -33,7 +41,10 @@ const App = () => {
         handleCountry={handleCountry}
         handleProfesion={handleProfesion}
       />
-      <AddUserCurrencyInfo />
+      <AddUserCurrencyInfo
+        handleSalary={handleSalary}
+        handleMedicare={handleMedicare}
+      />
       <div className="buttonsContainer">
         <AddButton />
         <CancelButton />

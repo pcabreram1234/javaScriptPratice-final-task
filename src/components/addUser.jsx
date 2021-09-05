@@ -6,11 +6,7 @@ import "../styles/AddUser.css";
 const AddUser = ({ handleUserName, handleCountry, handleProfesion }) => {
   const contriesList = Contries;
 
-  const getUsername = (e) => {
-    return e;
-  };
-
-  const getContryName = (e) => {
+  const getInfo = (e) => {
     return e;
   };
 
@@ -23,7 +19,7 @@ const AddUser = ({ handleUserName, handleCountry, handleProfesion }) => {
             placeholde="Nombre..."
             onChange={(e) => {
               let data = e.currentTarget.value;
-              handleUserName(getUsername(data));
+              handleUserName(getInfo(data));
             }}
           />
           <select
@@ -32,7 +28,7 @@ const AddUser = ({ handleUserName, handleCountry, handleProfesion }) => {
             onChange={(e) => {
               let data =
                 e.currentTarget.selectedOptions[0].innerHTML.toString();
-              handleCountry(getContryName(data));
+              handleCountry(getInfo(data));
             }}
           >
             {contriesList.map((el) => {
@@ -49,7 +45,7 @@ const AddUser = ({ handleUserName, handleCountry, handleProfesion }) => {
             onChange={(e) => {
               let data =
                 e.currentTarget.selectedOptions[0].innerHTML.toString();
-              handleProfesion(getContryName(data));
+              handleProfesion(getInfo(data));
             }}
           >
             <option value="">Estudiante</option>
