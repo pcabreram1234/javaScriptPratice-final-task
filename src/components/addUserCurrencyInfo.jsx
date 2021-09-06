@@ -1,10 +1,8 @@
 import React from "react";
 import addCurrencyInfoIcon from "../assets/images/AccountBalance.png";
-import { ValidateMedicare } from "../utils/validateMedicare";
 import "../styles/AddUserCurrencyInfo.css";
-import { validate } from "webpack";
 
-const AddUserCurrencyInfo = ({ handleSalary, handleMedicare }) => {
+const AddUserCurrencyInfo = ({ handleSalary, handleMedicare, handlePensionFund }) => {
   const getInfo = (e) => {
     return e;
   };
@@ -38,14 +36,14 @@ const AddUserCurrencyInfo = ({ handleSalary, handleMedicare }) => {
             id="SNS"
             className="AddUserCurrencyInfo--input"
             onChange={(e) => {
-              let data = e.currentTarget.value;
-              let medicarPorcent = ValidateMedicare(data);
-              console.log(medicarPorcent);
-         /*      ValidateMedicare(parseInt(data)) !== true
-                ? handleMedicare(getInfo(e.currentTarget.value))
-                : alert(
-                    "El % asignado para seguro médico no puede ser mayor a 20%"
-                  ); */
+              let data = parseInt(e.currentTarget.value);
+              if (data > 20) {
+                alert(
+                  "El % asignado para seguro médico no puede ser mayor a 20%"
+                );
+                data = 0
+              }
+              handleMedicare(getInfo(data))
             }}
           />
           <label htmlFor="SNS" className="AddUserCurrencyInfo--label">
@@ -59,6 +57,16 @@ const AddUserCurrencyInfo = ({ handleSalary, handleMedicare }) => {
             placeholder="Fondo de Pensiones %"
             id="AFP"
             className="AddUserCurrencyInfo--input"
+            onChange={(e) => {
+              let data = parseInt(e.currentTarget.value);
+              if (data > 5) {
+                alert(
+                  "El % asignado para seguro médico no puede ser mayor a 5%"
+                );
+                data = 0
+              }
+              handlePensionFund(getInfo(data))
+            }}
           />
           <label htmlFor="AFP" className="AddUserCurrencyInfo--label">
             .00

@@ -31,8 +31,12 @@ const App = () => {
   };
 
   const handleMedicare = (medicare) => {
-    setMedicare(medicare);
+    medicare === 0 || medicare === NaN ? setMedicare([]) : setMedicare(medicare);
   };
+
+  const handlePensionFund = (pension) => {
+    pension === 0 || pension === NaN ? setPensionFund([]) : setPensionFund(pension);
+  }
 
   return (
     <div onChange={console.log(userName)}>
@@ -44,6 +48,7 @@ const App = () => {
       <AddUserCurrencyInfo
         handleSalary={handleSalary}
         handleMedicare={handleMedicare}
+        handlePensionFund={handlePensionFund}
       />
       <div className="buttonsContainer">
         <AddButton />

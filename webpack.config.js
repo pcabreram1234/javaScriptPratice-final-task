@@ -9,7 +9,21 @@ module.exports = {
     filename: "bundle.js",
   },
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx"],
+    fallback: {
+      stream: false,
+      assert:false,
+      constants:false,
+      path:false,
+      os:false,
+      util:false,
+      vm:false,
+      zlib:false,
+      http:false,
+      https:false,
+      buffer:false,
+      crypto:false
+    }
   },
   module: {
     rules: [
