@@ -2,7 +2,12 @@ import React from "react";
 import addCurrencyInfoIcon from "../assets/images/AccountBalance.png";
 import "../styles/AddUserCurrencyInfo.css";
 
-const AddUserCurrencyInfo = ({ handleSalary, handleMedicare, handlePensionFund }) => {
+const AddUserCurrencyInfo = ({
+  handleSalary,
+  handleMedicare,
+  handlePensionFund,
+  handleAditionalExpenxes,
+}) => {
   const getInfo = (e) => {
     return e;
   };
@@ -41,9 +46,9 @@ const AddUserCurrencyInfo = ({ handleSalary, handleMedicare, handlePensionFund }
                 alert(
                   "El % asignado para seguro médico no puede ser mayor a 20%"
                 );
-                data = 0
+                data = 0;
               }
-              handleMedicare(getInfo(data))
+              handleMedicare(getInfo(data));
             }}
           />
           <label htmlFor="SNS" className="AddUserCurrencyInfo--label">
@@ -63,9 +68,9 @@ const AddUserCurrencyInfo = ({ handleSalary, handleMedicare, handlePensionFund }
                 alert(
                   "El % asignado para seguro médico no puede ser mayor a 5%"
                 );
-                data = 0
+                data = 0;
               }
-              handlePensionFund(getInfo(data))
+              handlePensionFund(getInfo(data));
             }}
           />
           <label htmlFor="AFP" className="AddUserCurrencyInfo--label">
@@ -79,6 +84,10 @@ const AddUserCurrencyInfo = ({ handleSalary, handleMedicare, handlePensionFund }
             placeholder="Otros Gastos RD$"
             id="GASTOS"
             className="AddUserCurrencyInfo--input"
+            onChange={(e) => {
+              let data = parseInt(e.currentTarget.value);
+              handleAditionalExpenxes(getInfo(data));
+            }}
           />
           <label htmlFor="GASTOS" className="AddUserCurrencyInfo--label">
             .00
