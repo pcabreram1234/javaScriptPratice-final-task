@@ -2,12 +2,12 @@ import React from "react";
 import "../styles/AddButton.css";
 import saveIcon from "../assets/images/Save.png";
 
-const AddButton = ({ handleUserInfo }, props) => {
+const AddButton = ({ handleUserInfo }) => {
   return (
     <button
       className="add"
       onClick={() => {
-        console.log(handleUserInfo(props.length));
+        console.log(handleUserInfo());
       }}
     >
       <img src={saveIcon} alt="" className="saveIcon" />

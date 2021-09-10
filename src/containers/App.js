@@ -56,8 +56,9 @@ const App = () => {
   };
 
   const handleUserInfo = () => {
-    validateInputs(usersInfo);
-    /* usersInfo === []
+    const vali = validateInputs(usersInfo);
+    console.log(vali);
+    /*     usersInfo === []
       ? setUsersInfo([
           userName,
           profesion,
