@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,16 +6,18 @@
 
 }
 
-body{
+html[baseURI="http://localhost:8080/calc"] body {
+    height: 100vw;
+}
+
+
+body {
     background: linear-gradient(180deg, #955893 0%, #49A4C8 77.6%, #43AACC 100%);
+    background-size: cover;
 }
 
-.buttonsContainer{
-    display: flex;
-    justify-content: center;
-    margin: 15px 0px;
-}
-.buttonsContainer button{
-    margin: 0px 6px;
-}
 
+.App {
+    height: 100%;
+    background-size: cover;
+}

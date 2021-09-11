@@ -1,15 +1,20 @@
-import React from "react"
-import cancelIcon from "../assets/images/Close.png"
+import React from "react";
+import cancelIcon from "../assets/images/Close.png";
 
-import "../styles/CancelButton.css"
+import "../styles/CancelButton.css";
 
-const CancelButton = () => {
-    return (
-        <button className="cancel">
-            <img src={cancelIcon} alt="" className="saveIcon" />
-            <span>cancelar</span>
-        </button>
-    )
-}
+const CancelButton = ({ restUsersInfo }) => {
+  return (
+    <button
+      className="cancel"
+      onClick={() => {
+        restUsersInfo();
+      }}
+    >
+      <img src={cancelIcon} alt="" className="saveIcon" />
+      <span>cancelar</span>
+    </button>
+  );
+};
 
-export default CancelButton
+export default CancelButton;

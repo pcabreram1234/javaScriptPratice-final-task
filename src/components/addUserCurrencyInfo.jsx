@@ -58,7 +58,7 @@ const AddUserCurrencyInfo = ({
 
         <div className="AddUserCurrencyInfo--col">
           <input
-            type="text"
+            type="number"
             placeholder="Fondo de Pensiones %"
             id="AFP"
             className="AddUserCurrencyInfo--input"
@@ -80,7 +80,7 @@ const AddUserCurrencyInfo = ({
 
         <div className="AddUserCurrencyInfo--col">
           <input
-            type="text"
+            type="number"
             placeholder="Otros Gastos RD$"
             id="GASTOS"
             className="AddUserCurrencyInfo--input"

@@ -1,0 +1,18 @@
+.buttonsContainer {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0px;
+}
+
+.buttonsContainer button {
+    margin: 0px 6px;
+}
+
+input {
+    outline: none;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}

@@ -3,10 +3,13 @@ import AddUser from "../components/addUser";
 import AddUserCurrencyInfo from "../components/addUserCurrencyInfo";
 import AddButton from "../components/addButton";
 import CancelButton from "../components/cancelButton";
+import CalcButton from "../components/CalcButton";
 import { validateInputs } from "../utils/validateInputs";
-import "../styles/App.css";
+import { ClearInputs } from "../utils/clearInputs";
+import { Link } from "react-router-dom";
+import "../styles/AddPeopleInfo.css";
 
-const App = () => {
+const AddPeopleInfo = () => {
   const [usersInfo, setUsersInfo] = useState([]);
   const [userName, setName] = useState({});
   const [country, setCountry] = useState([]);
@@ -66,10 +69,11 @@ const App = () => {
       pensionFund,
       AditionalExpenses
     );
+
     validateInputs(temporalUsersInfo) !== 7
       ? alert("Faltan campos por llenar")
       : usersInfo === []
-      ? setUsersInfo([
+      ? (setUsersInfo([
           userName,
           profesion,
           salary,
@@ -77,7 +81,8 @@ const App = () => {
           medicare,
           pensionFund,
           AditionalExpenses,
-        ])
+        ]),
+        ClearInputs())
       : setUsersInfo([
           ...usersInfo,
           [
@@ -89,9 +94,16 @@ const App = () => {
             pensionFund,
             AditionalExpenses,
           ],
-        ]);
+        ]),
+      ClearInputs();
   };
 
+  const restUsersInfo = () => {
+    let question = confirm(
+      "En verdad deseas detener el proceso de añadir más datos?"
+    );
+    question ? setUsersInfo([]) : null;
+  };
   return (
     <div>
       <AddUser
@@ -107,10 +119,13 @@ const App = () => {
       />
       <div className="buttonsContainer">
         <AddButton handleUserInfo={handleUserInfo} />
-        <CancelButton />
+        <CancelButton restUsersInfo={restUsersInfo} />
+        <Link to="/calc">
+          <CalcButton />
+        </Link>
       </div>
     </div>
   );
 };
 
-export default App;
+export default AddPeopleInfo;

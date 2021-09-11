@@ -1,0 +1,41 @@
+.card {
+    margin: 10px 10px;
+    width: 15vw;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+h1,
+span {
+    color: white;
+    padding: 20px 0px;
+}
+
+hr {
+    width: 100%;
+    color: rgba(255, 255, 255, 0.582);
+}
+
+.bg-green {
+    background: linear-gradient(179.96deg, #4D8076 0.03%, #00C9A7 106.91%);
+    border-radius: 40px;
+}
+
+.bg-blue {
+    background: linear-gradient(179.96deg, #0081CF 0.03%, #2C73D2 106.91%);
+    border-radius: 40px;
+}
+
+.bg-purple {
+    background: linear-gradient(179.96deg, #9B89B3 0.03%, #845EC2 106.91%);
+    border-radius: 40px;
+}
+
+.bg-orange {
+    background: linear-gradient(179.95deg, #C34A36 0.04%, #FF8268 72.43%);
+    border-radius: 40px;
+}
