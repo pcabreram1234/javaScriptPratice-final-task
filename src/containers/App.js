@@ -8,7 +8,7 @@ import "../styles/App.css";
 
 const App = () => {
   const [usersInfo, setUsersInfo] = useState([]);
-  const [userName, setName] = useState([]);
+  const [userName, setName] = useState({});
   const [country, setCountry] = useState([]);
   const [profesion, setProfesion] = useState([]);
   const [salary, setSalary] = useState([]);
@@ -56,9 +56,19 @@ const App = () => {
   };
 
   const handleUserInfo = () => {
-    const vali = validateInputs(usersInfo);
-    console.log(vali);
-    /*     usersInfo === []
+    let temporalUsersInfo = [];
+    temporalUsersInfo.push(
+      userName,
+      country,
+      profesion,
+      salary,
+      medicare,
+      pensionFund,
+      AditionalExpenses
+    );
+    validateInputs(temporalUsersInfo) !== 7
+      ? alert("Faltan campos por llenar")
+      : usersInfo === []
       ? setUsersInfo([
           userName,
           profesion,
@@ -79,7 +89,7 @@ const App = () => {
             pensionFund,
             AditionalExpenses,
           ],
-        ]); */
+        ]);
   };
 
   return (

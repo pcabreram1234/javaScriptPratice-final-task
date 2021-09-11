@@ -7,7 +7,7 @@ const AddButton = ({ handleUserInfo }) => {
     <button
       className="add"
       onClick={() => {
-        console.log(handleUserInfo());
+        handleUserInfo();
       }}
     >
       <img src={saveIcon} alt="" className="saveIcon" />

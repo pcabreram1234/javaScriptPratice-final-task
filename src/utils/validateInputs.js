@@ -1,9 +1,9 @@
 export const validateInputs = (props) => {
-  props === [] ? alert("Faltan datos por completar") : 1;
-  /*  for (const iterator of props) {
-    console.log(iterator);
-    iterator.lenght === 0 || iterator.lenght < 7 || iterator === undefined
-      ? alert("Faltan datos por completar")
-      : true;
-  } */
+  let counter = 0;
+
+  for (const key in props) {
+    let currentObject = props[key].length;
+    currentObject !== 0 ? counter++ : (counter = 0);
+  }
+  return counter;
 };
