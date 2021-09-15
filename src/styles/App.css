@@ -7,13 +7,14 @@
 }
 
 html[baseURI="http://localhost:8080/calc"] body {
-    height: 100vw;
+
 }
 
 
 body {
     background: linear-gradient(180deg, #955893 0%, #49A4C8 77.6%, #43AACC 100%);
     background-size: cover;
+    height: 100vw;
 }
 
 
