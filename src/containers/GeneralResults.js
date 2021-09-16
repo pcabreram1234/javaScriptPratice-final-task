@@ -4,7 +4,7 @@ import TitleResult from "../components/TitleResult";
 import "../styles/GeneralResult.css";
 const GeneralResult = () => {
   return (
-    <div>
+    <div className="General--container">
       <TitleResult title="Resultados Generales" />
       <div className="GeneralResult-Container">
         <Card title="Ingresos" data="RD$ 25,0000" bg="bg-green" />

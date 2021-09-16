@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useRef } from "react";
 import addUserIcon from "../assets/images/Add user.png";
 import Contries from "../json/contries.json";
 import "../styles/AddUser.css";
 
-const AddUser = ({ handleUserName, handleCountry, handleProfesion }) => {
+const AddUser = (
+  {
+    handleUserName,
+    handleCountry,
+    handleProfesion,
+    setRefinput,
+    setCountryRef,
+  },
+  props
+) => {
   const contriesList = Contries;
 
   const getInfo = (e) => {
@@ -17,9 +26,13 @@ const AddUser = ({ handleUserName, handleCountry, handleProfesion }) => {
           <input
             type="text"
             placeholde="Nombre..."
+            ref={props.refInput}
             onChange={(e) => {
+              setRefinput(e.currentTarget);
               let data = e.currentTarget.value;
-              handleUserName(getInfo(data));
+              data === ""
+                ? handleUserInputFocus()
+                : handleUserName(getInfo(data));
             }}
           />
           <select
@@ -33,7 +46,13 @@ const AddUser = ({ handleUserName, handleCountry, handleProfesion }) => {
           >
             {contriesList.map((el) => {
               return (
-                <option key={el.code} value={el.code}>
+                <option
+                  key={el.code}
+                  value={el.code}
+                  onChange={(e) => {
+                    setCountryRef(e.currentTarget.value);
+                  }}
+                >
                   {el.name}
                 </option>
               );
@@ -48,6 +67,7 @@ const AddUser = ({ handleUserName, handleCountry, handleProfesion }) => {
               handleProfesion(getInfo(data));
             }}
           >
+            <option value="">Seleccionar una opción</option>
             <option value="">Estudiante</option>
             <option value="">Desarrollador Web</option>
             <option value="">Maestro</option>
