@@ -6,7 +6,7 @@ import CancelButton from "../components/cancelButton";
 import CalcButton from "../components/CalcButton";
 import { validateInputs } from "../utils/validateInputs";
 import { ClearInputs } from "../utils/clearInputs";
-import { validateCountry } from "../utils/validateCountry";
+import { DomObjetct } from "../utils/DomObjectsSelector";
 import { Link } from "react-router-dom";
 import "../styles/AddPeopleInfo.css";
 
@@ -22,6 +22,7 @@ const AddPeopleInfo = () => {
 
   const refInput = useRef(null);
   const refCountry = useRef(null);
+  const refProfesion = useRef(null);
 
   const setRefinput = (input) => {
     refInput.current = input;
@@ -30,6 +31,15 @@ const AddPeopleInfo = () => {
   const setCountryRef = (country) => {
     refCountry.current = country;
   };
+
+  const handleCountryRef = () => {
+    console.log(refCountry);
+  };
+
+  const setRefProfesion = (currentProfesion) => {
+    refProfesion.current = currentProfesion;
+  };
+
   const handleUserInputFocus = () => {
     refInput.current.focus();
     console.log(refInput);
@@ -75,10 +85,20 @@ const AddPeopleInfo = () => {
   };
 
   const handleUserInfo = () => {
-    let countryValidate = validateCountry(country);
-    console.log(countryValidate);
-    /*   if ((countryValidate == 0 || country == [])) {
+    if (country.length === 0 || country == "Seleccione un pais") {
       alert("Favor de seleccionar el pais");
+      setCountryRef(document.querySelector(DomObjetct.pais.toString()));
+      refCountry.current.focus();
+      return;
+    } else if (
+      profesion.length === 0 ||
+      profesion === "Seleccionar una opción"
+    ) {
+      alert("Favor de seleccionar la profesión");
+      setRefProfesion(
+        document.querySelector(DomObjetct.profesion.toString())
+      );
+      refProfesion.current.focus();
       return;
     } else {
       let temporalUsersInfo = [];
@@ -117,7 +137,7 @@ const AddPeopleInfo = () => {
             ],
           ]),
         ClearInputs();
-    } */
+    }
   };
 
   const restUsersInfo = () => {
@@ -135,6 +155,8 @@ const AddPeopleInfo = () => {
         handleProfesion={handleProfesion}
         setRefinput={setRefinput}
         setCountryRef={setCountryRef}
+        handleCountryRef={handleCountryRef}
+        setRefProfesion={setRefProfesion}
         refInput={refInput}
       />
       <AddUserCurrencyInfo
@@ -144,13 +166,8 @@ const AddPeopleInfo = () => {
         handleAditionalExpenxes={handleAditionalExpenxes}
       />
       <div className="buttonsContainer">
-        <AddButton
-          handleUserInfo={handleUserInfo}
-          handleUserInputFocus={handleUserInputFocus}
-        />
-        <CancelButton
-          restUsersInfo={restUsersInfo}
-        />
+        <AddButton handleUserInfo={handleUserInfo} />
+        <CancelButton restUsersInfo={restUsersInfo} />
         <Link
           to="/calc"
           onClick={(e) => {

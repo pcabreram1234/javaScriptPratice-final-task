@@ -10,6 +10,8 @@ const AddUser = (
     handleProfesion,
     setRefinput,
     setCountryRef,
+    handleCountryRef,
+    setRefProfesion,
   },
   props
 ) => {
@@ -42,17 +44,12 @@ const AddUser = (
               let data =
                 e.currentTarget.selectedOptions[0].innerHTML.toString();
               handleCountry(getInfo(data));
+              setCountryRef(data);
             }}
           >
             {contriesList.map((el) => {
               return (
-                <option
-                  key={el.code}
-                  value={el.code}
-                  onChange={(e) => {
-                    setCountryRef(e.currentTarget.value);
-                  }}
-                >
+                <option key={el.code} value={el.code}>
                   {el.name}
                 </option>
               );
@@ -65,6 +62,7 @@ const AddUser = (
               let data =
                 e.currentTarget.selectedOptions[0].innerHTML.toString();
               handleProfesion(getInfo(data));
+              setRefProfesion(data);
             }}
           >
             <option value="">Seleccionar una opción</option>
