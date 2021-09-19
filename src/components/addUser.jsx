@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import addUserIcon from "../assets/images/Add user.png";
 import Contries from "../json/contries.json";
 import "../styles/AddUser.css";
@@ -10,8 +10,8 @@ const AddUser = (
     handleProfesion,
     setRefinput,
     setCountryRef,
-    handleCountryRef,
     setRefProfesion,
+    handleUserInputFocus,
   },
   props
 ) => {
@@ -29,6 +29,7 @@ const AddUser = (
             type="text"
             placeholde="Nombre..."
             ref={props.refInput}
+            autoFocus
             onChange={(e) => {
               setRefinput(e.currentTarget);
               let data = e.currentTarget.value;

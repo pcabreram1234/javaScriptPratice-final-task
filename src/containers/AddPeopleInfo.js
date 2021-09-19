@@ -28,21 +28,16 @@ const AddPeopleInfo = () => {
     refInput.current = input;
   };
 
-  const setCountryRef = (country) => {
-    refCountry.current = country;
-  };
-
-  const handleCountryRef = () => {
-    console.log(refCountry);
-  };
-
-  const setRefProfesion = (currentProfesion) => {
-    refProfesion.current = currentProfesion;
-  };
-
   const handleUserInputFocus = () => {
     refInput.current.focus();
     console.log(refInput);
+  };
+
+  const setCountryRef = (country) => {
+    refCountry.current = country;
+  };
+  const setRefProfesion = (currentProfesion) => {
+    refProfesion.current = currentProfesion;
   };
 
   const handleUserName = (name) => {
@@ -95,9 +90,7 @@ const AddPeopleInfo = () => {
       profesion === "Seleccionar una opción"
     ) {
       alert("Favor de seleccionar la profesión");
-      setRefProfesion(
-        document.querySelector(DomObjetct.profesion.toString())
-      );
+      setRefProfesion(document.querySelector(DomObjetct.profesion.toString()));
       refProfesion.current.focus();
       return;
     } else {
@@ -144,7 +137,14 @@ const AddPeopleInfo = () => {
     let question = confirm(
       "En verdad deseas detener el proceso de añadir más datos?"
     );
-    question ? (setUsersInfo([]), ClearInputs()) : null;
+    question
+      ? (setUsersInfo([]),
+        ClearInputs(),
+        refInput !== null
+          ? handleUserInputFocus()
+          : setRefinput(document.querySelector(DomObjetct.nombre.toString())),
+        handleUserInputFocus())
+      : null;
   };
 
   return (
@@ -155,9 +155,9 @@ const AddPeopleInfo = () => {
         handleProfesion={handleProfesion}
         setRefinput={setRefinput}
         setCountryRef={setCountryRef}
-        handleCountryRef={handleCountryRef}
         setRefProfesion={setRefProfesion}
         refInput={refInput}
+        handleUserInputFocus={handleUserInputFocus}
       />
       <AddUserCurrencyInfo
         handleSalary={handleSalary}
@@ -173,7 +173,11 @@ const AddPeopleInfo = () => {
           onClick={(e) => {
             usersInfo.length < 2
               ? (alert("Favor de introducir por lo menos dos personas"),
-                e.preventDefault())
+                e.preventDefault(),
+                refInput.current !== null
+                  ? refInput.current.focus()
+                  : setRefinput(document.querySelector(DomObjetct.nombre)),
+                refInput.current.focus())
               : 0;
           }}
         >
