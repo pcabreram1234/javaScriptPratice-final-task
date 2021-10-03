@@ -3,17 +3,20 @@ import cancelIcon from "../assets/images/Close.png";
 
 import "../styles/CancelButton.css";
 
-const CancelButton = ({ restUsersInfo, handleUserInputFocus }) => {
+const CancelButton = ({ restUsersInfo, setRefCancelButton }) => {
   return (
     <button
+      onLoad={(e) => {
+        setRefCancelButton(e.currentTarget);
+        e.currentTarget.disabled = true;
+      }}
       className="cancel"
       onClick={() => {
         restUsersInfo();
-        handleUserInputFocus();
       }}
     >
       <img src={cancelIcon} alt="" className="saveIcon" />
-      <span>cancelar</span>
+      <span>Reiniciar</span>
     </button>
   );
 };

@@ -26,7 +26,7 @@ const AddUserCurrencyInfo = ({
             className="AddUserCurrencyInfo--input"
             onChange={(e) => {
               let data = e.currentTarget.value;
-              handleSalary(getInfo(data));
+              handleSalary(getInfo(data), e.currentTarget);
             }}
           />
           <label htmlFor="Sueldo" className="AddUserCurrencyInfo--label">
@@ -48,7 +48,7 @@ const AddUserCurrencyInfo = ({
                 );
                 data = 0;
               }
-              handleMedicare(getInfo(data));
+              handleMedicare(getInfo(data), e.currentTarget);
             }}
           />
           <label htmlFor="SNS" className="AddUserCurrencyInfo--label">
@@ -70,7 +70,7 @@ const AddUserCurrencyInfo = ({
                 );
                 data = 0;
               }
-              handlePensionFund(getInfo(data));
+              handlePensionFund(getInfo(data), e.currentTarget);
             }}
           />
           <label htmlFor="AFP" className="AddUserCurrencyInfo--label">
@@ -86,7 +86,7 @@ const AddUserCurrencyInfo = ({
             className="AddUserCurrencyInfo--input"
             onChange={(e) => {
               let data = parseInt(e.currentTarget.value);
-              handleAditionalExpenxes(getInfo(data));
+              handleAditionalExpenxes(getInfo(data), e.currentTarget);
             }}
           />
           <label htmlFor="GASTOS" className="AddUserCurrencyInfo--label">

@@ -3,18 +3,13 @@ import addUserIcon from "../assets/images/Add user.png";
 import Contries from "../json/contries.json";
 import "../styles/AddUser.css";
 
-const AddUser = (
-  {
-    handleUserName,
-    handleCountry,
-    handleProfesion,
-    setRefinput,
-    setCountryRef,
-    setRefProfesion,
-    handleUserInputFocus,
-  },
-  props
-) => {
+const AddUser = ({
+  handleUserName,
+  handleCountry,
+  handleProfesion,
+  handleUserInputFocus,
+  setRefinput,
+}) => {
   const contriesList = Contries;
 
   const getInfo = (e) => {
@@ -28,14 +23,16 @@ const AddUser = (
           <input
             type="text"
             placeholde="Nombre..."
-            ref={props.refInput}
             autoFocus
-            onChange={(e) => {
+            onLoad={(e) => {
               setRefinput(e.currentTarget);
+              handleUserInputFocus();
+            }}
+            onChange={(e) => {
               let data = e.currentTarget.value;
               data === ""
                 ? handleUserInputFocus()
-                : handleUserName(getInfo(data));
+                : handleUserName(getInfo(data), e.currentTarget);
             }}
           />
           <select
@@ -44,8 +41,7 @@ const AddUser = (
             onChange={(e) => {
               let data =
                 e.currentTarget.selectedOptions[0].innerHTML.toString();
-              handleCountry(getInfo(data));
-              setCountryRef(data);
+              handleCountry(getInfo(data), e.currentTarget);
             }}
           >
             {contriesList.map((el) => {
@@ -62,8 +58,7 @@ const AddUser = (
             onChange={(e) => {
               let data =
                 e.currentTarget.selectedOptions[0].innerHTML.toString();
-              handleProfesion(getInfo(data));
-              setRefProfesion(data);
+              handleProfesion(getInfo(data), e.currentTarget);
             }}
           >
             <option value="">Seleccionar una opción</option>

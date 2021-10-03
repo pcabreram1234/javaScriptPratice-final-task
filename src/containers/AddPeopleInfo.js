@@ -23,52 +23,60 @@ const AddPeopleInfo = () => {
   const refInput = useRef(null);
   const refCountry = useRef(null);
   const refProfesion = useRef(null);
+  const refSalary = useRef(null);
+  const refMedicare = useRef(null);
+  const refPensionFund = useRef(null);
+  const refAditionalExpenses = useRef(null);
+  const refCancelButton = useRef(null);
 
   const setRefinput = (input) => {
     refInput.current = input;
   };
 
+  const setRefCancelButton = (button) => {
+    refCancelButton.current = button;
+  };
+
   const handleUserInputFocus = () => {
     refInput.current.focus();
-    console.log(refInput);
   };
 
-  const setCountryRef = (country) => {
-    refCountry.current = country;
-  };
-  const setRefProfesion = (currentProfesion) => {
-    refProfesion.current = currentProfesion;
-  };
-
-  const handleUserName = (name) => {
+  const handleUserName = (name, newRef) => {
     name === "" ? setName([""]) : setName(name);
+    refInput.current = newRef;
   };
 
-  const handleCountry = (country) => {
+  const handleCountry = (country, newRef) => {
     country === "" ? setCountry([""]) : setCountry(country);
+    refCountry.current = newRef;
   };
 
-  const handleProfesion = (profesion) => {
+  const handleProfesion = (profesion, newRef) => {
     profesion === "" ? setProfesion([""]) : setProfesion(profesion);
+    refProfesion.current = newRef;
   };
 
-  const handleSalary = (salary) => {
+  const handleSalary = (salary, newRef) => {
+    refSalary.current = newRef;
     setSalary(salary);
   };
 
-  const handleMedicare = (medicare) => {
+  const handleMedicare = (medicare, newRef) => {
+    refMedicare.current = newRef;
     medicare === 0 || medicare === NaN
       ? setMedicare([])
       : setMedicare(medicare);
   };
 
-  const handlePensionFund = (pension) => {
+  const handlePensionFund = (pension, newRef) => {
+    refPensionFund.current = newRef;
     pension === 0 || pension === NaN
       ? setPensionFund([])
       : setPensionFund(pension);
   };
 
-  const handleAditionalExpenxes = (expense) => {
+  const handleAditionalExpenxes = (expense, newRef) => {
+    refAditionalExpenses.current = newRef;
     const totalMedicare = (medicare * salary) / 100;
     const totalPensionFund = (pensionFund * salary) / 100;
     totalMedicare + totalPensionFund + expense > salary
@@ -82,16 +90,12 @@ const AddPeopleInfo = () => {
   const handleUserInfo = () => {
     if (country.length === 0 || country == "Seleccione un pais") {
       alert("Favor de seleccionar el pais");
-      setCountryRef(document.querySelector(DomObjetct.pais.toString()));
-      refCountry.current.focus();
       return;
     } else if (
       profesion.length === 0 ||
       profesion === "Seleccionar una opción"
     ) {
       alert("Favor de seleccionar la profesión");
-      setRefProfesion(document.querySelector(DomObjetct.profesion.toString()));
-      refProfesion.current.focus();
       return;
     } else {
       let temporalUsersInfo = [];
@@ -116,7 +120,15 @@ const AddPeopleInfo = () => {
             pensionFund,
             AditionalExpenses,
           ]),
-          ClearInputs())
+          ClearInputs({
+            refInput,
+            refCountry,
+            refProfesion,
+            refAditionalExpenses,
+            refMedicare,
+            refSalary,
+            refPensionFund,
+          }))
         : setUsersInfo([
             ...usersInfo,
             [
@@ -129,7 +141,17 @@ const AddPeopleInfo = () => {
               AditionalExpenses,
             ],
           ]),
-        ClearInputs();
+        ClearInputs({
+          refInput,
+          refCountry,
+          refProfesion,
+          refAditionalExpenses,
+          refMedicare,
+          refSalary,
+          refPensionFund,
+        });
+      console.log(refCancelButton);
+      refCancelButton.current.disabled = false;
     }
   };
 
@@ -139,7 +161,15 @@ const AddPeopleInfo = () => {
     );
     question
       ? (setUsersInfo([]),
-        ClearInputs(),
+        ClearInputs({
+          refInput,
+          refCountry,
+          refProfesion,
+          refAditionalExpenses,
+          refMedicare,
+          refSalary,
+          refPensionFund,
+        }),
         refInput !== null
           ? handleUserInputFocus()
           : setRefinput(document.querySelector(DomObjetct.nombre.toString())),
@@ -153,11 +183,8 @@ const AddPeopleInfo = () => {
         handleUserName={handleUserName}
         handleCountry={handleCountry}
         handleProfesion={handleProfesion}
-        setRefinput={setRefinput}
-        setCountryRef={setCountryRef}
-        setRefProfesion={setRefProfesion}
-        refInput={refInput}
         handleUserInputFocus={handleUserInputFocus}
+        setRefinput={setRefinput}
       />
       <AddUserCurrencyInfo
         handleSalary={handleSalary}
@@ -165,9 +192,13 @@ const AddPeopleInfo = () => {
         handlePensionFund={handlePensionFund}
         handleAditionalExpenxes={handleAditionalExpenxes}
       />
+
       <div className="buttonsContainer">
         <AddButton handleUserInfo={handleUserInfo} />
-        <CancelButton restUsersInfo={restUsersInfo} />
+        <CancelButton
+          restUsersInfo={restUsersInfo}
+          setRefCancelButton={setRefCancelButton}
+        />
         <Link
           to="/calc"
           onClick={(e) => {

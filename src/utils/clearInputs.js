@@ -1,8 +1,10 @@
-export const ClearInputs = () => {
-  document.querySelectorAll("input").forEach((el) => {
-    el.value = "";
-  });
-  const elFocus = document.querySelector(
-    "#app > div > div > div.AddUser--container > div > div:nth-child(1) > input[type=text]"
-  );
+export const ClearInputs = (refObject) => {
+  refObject.refAditionalExpenses.current.value = "";
+  refObject.refInput.current.value = "";
+  refObject.refMedicare.current.value = "";
+  refObject.refPensionFund.current.value = "";
+  refObject.refSalary.current.value = "";
+  refObject.refCountry.current[0].selected = true;
+  refObject.refProfesion.current[0].selected = true;
+  refObject.refInput.current.focus();
 };
