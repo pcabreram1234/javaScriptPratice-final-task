@@ -9,6 +9,7 @@ import { ClearInputs } from "../utils/clearInputs";
 import { DomObjetct } from "../utils/DomObjectsSelector";
 import { Link } from "react-router-dom";
 import "../styles/AddPeopleInfo.css";
+import GeneralResult from "./GeneralResults";
 
 const AddPeopleInfo = () => {
   const [usersInfo, setUsersInfo] = useState([]);
@@ -200,19 +201,13 @@ const AddPeopleInfo = () => {
           setRefCancelButton={setRefCancelButton}
         />
         <Link
-          to="/calc"
-          onClick={(e) => {
-            usersInfo.length < 2
-              ? (alert("Favor de introducir por lo menos dos personas"),
-                e.preventDefault(),
-                refInput.current !== null
-                  ? refInput.current.focus()
-                  : setRefinput(document.querySelector(DomObjetct.nombre)),
-                refInput.current.focus())
-              : 0;
+          to={{
+            pathname: "/calc",
+            state: { usersInfo },
           }}
+
         >
-          <CalcButton />
+          <CalcButton usersInfo={usersInfo} refInput={refInput} />
         </Link>
       </div>
     </div>
