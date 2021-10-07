@@ -1,14 +1,24 @@
 .titleResult--container {
-width: 100%;
+    width: 100%;
 }
 
-.titleResult--container img{
+.Background {
     width: 100vw;
     height: 5rem;
 }
 
-.titleResult--container__h1{
+.titleResult--container__h1 {
+    position: absolute;
+    left: 80px;
+    top: 0px
+}
+
+.BackIcon {
     position: absolute;
     left: 10px;
-    top:0px
+    top: 5px;
+}
+
+.BackIcon:hover {
+    background-color: white;
 }

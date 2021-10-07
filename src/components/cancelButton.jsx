@@ -14,6 +14,8 @@ const CancelButton = ({ restUsersInfo, setRefCancelButton }) => {
       onClick={() => {
         restUsersInfo();
       }}
+      type="button"
+      role="button"
     >
       <img src={cancelIcon} alt="" className="saveIcon" />
       <span>Reiniciar</span>

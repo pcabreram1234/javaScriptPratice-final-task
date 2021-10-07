@@ -6,10 +6,8 @@ import CancelButton from "../components/cancelButton";
 import CalcButton from "../components/CalcButton";
 import { validateInputs } from "../utils/validateInputs";
 import { ClearInputs } from "../utils/clearInputs";
-import { DomObjetct } from "../utils/DomObjectsSelector";
 import { Link } from "react-router-dom";
 import "../styles/AddPeopleInfo.css";
-import GeneralResult from "./GeneralResults";
 
 const AddPeopleInfo = () => {
   const [usersInfo, setUsersInfo] = useState([]);
@@ -151,7 +149,6 @@ const AddPeopleInfo = () => {
           refSalary,
           refPensionFund,
         });
-      console.log(refCancelButton);
       refCancelButton.current.disabled = false;
     }
   };
@@ -171,11 +168,9 @@ const AddPeopleInfo = () => {
           refSalary,
           refPensionFund,
         }),
-        refInput !== null
-          ? handleUserInputFocus()
-          : setRefinput(document.querySelector(DomObjetct.nombre.toString())),
-        handleUserInputFocus())
-      : null;
+        (refCancelButton.current.disabled = true),
+        refInput.current.focus())
+      : refInput.current.focus();
   };
 
   return (
@@ -205,9 +200,12 @@ const AddPeopleInfo = () => {
             pathname: "/calc",
             state: { usersInfo },
           }}
-
         >
-          <CalcButton usersInfo={usersInfo} refInput={refInput} />
+          <CalcButton
+            usersInfo={usersInfo}
+            refInput={refInput}
+            setRefinput={setRefinput}
+          />
         </Link>
       </div>
     </div>

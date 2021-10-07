@@ -14,12 +14,14 @@
 .cancel:enabled {
     opacity: 1;
     cursor: pointer;
+    display: flex;
 
 }
 
 .cancel:disabled {
     opacity: 0.5;
     cursor: default;
+    display: none;
 }
 
 
