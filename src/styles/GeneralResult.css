@@ -5,3 +5,7 @@
     flex-wrap: nowrap;
     flex-direction: row;
 }
+
+.GeneralResult-Container .card {
+    margin-top: 5vh;
+}

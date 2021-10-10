@@ -7,7 +7,6 @@ import TitleResult from "./TitleResult";
 import "../styles/ResultByProfesion.css";
 
 const ResultByProfesion = (props) => {
-  console.log(Profesions[0]);
   const renderBryProfesion = Object.values(Profesions[0]).map((el) => {
     let group = groupByProfesion(el, props.usersInfo);
     const category = [];

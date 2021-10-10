@@ -1,6 +1,10 @@
 .ResultByProfesion--container {
-    margin: 20vh 0vh 20vh 0vh;
+    margin: 15vh 0vh 15vh 0vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+.ResultByProfesion--container .card {
+    margin-top: 5vh;
 }
