@@ -9,8 +9,10 @@ const TitleResult = (props) => {
       <Link to="/">
         <img src={backIcon} className="BackIcon" />
       </Link>
-      <img src={TittleBackground} alt="" className="Background" />
-      <h1 className="titleResult--container__h1">{props.title}</h1>
+      {/*   <img src={TittleBackground} alt="" className="Background" /> */}
+      <div className="Background">
+        <h1 className="titleResult--container__h1">{props.title}</h1>
+      </div>
     </div>
   );
 };

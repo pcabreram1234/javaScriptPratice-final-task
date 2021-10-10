@@ -7,6 +7,7 @@
     align-content: center;
     align-items: center;
     justify-content: center;
+    background-color: #84DCFE;
 }
 
 h1,
@@ -21,21 +22,22 @@ hr {
 }
 
 .bg-green {
-    background: linear-gradient(179.96deg, #ACF1E4 0.03%, #A6F7D6 106.91%);
+
+    /*    background: linear-gradient(179.96deg, #ACF1E4 0.03%, #A6F7D6 106.91%); */
     border-radius: 40px;
 }
 
 .bg-blue {
-    background: linear-gradient(179.96deg, #7ED5E0 0.03%, #62B6DA 106.91%);
+    /* background: linear-gradient(179.96deg, #7ED5E0 0.03%, #62B6DA 106.91%); */
     border-radius: 40px;
 }
 
 .bg-purple {
-    background: #992E9F;
+    /*  background: #992E9F; */
     border-radius: 40px;
 }
 
 .bg-orange {
-    background: linear-gradient(179.95deg, #E1A173 0.04%, #E1A173 72.43%);
+    /*  background: linear-gradient(179.95deg, #E1A173 0.04%, #E1A173 72.43%); */
     border-radius: 40px;
 }

@@ -4,8 +4,12 @@
 }
 
 .Background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100vw;
     height: 5rem;
+    background-color: #AA8B71;
 }
 
 .titleResult--container__h1 {
@@ -13,6 +17,7 @@
     left: 80px;
     top: 0px;
     text-align: center;
+    display: contents;
 }
 
 .BackIcon {
