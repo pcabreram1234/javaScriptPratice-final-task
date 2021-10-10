@@ -1,0 +1,6 @@
+.ResultByProfesion--container {
+    margin: 20vh 0vh 20vh 0vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

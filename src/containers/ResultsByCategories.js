@@ -1,15 +1,11 @@
 import React from "react";
-import TitleResult from "../components/TitleResult";
-/* import "../styles/GeneralResult.css"; */
-import { renderByProfesion } from "../utils/renderByProfesion";
+import "../styles/ResultByProfesion.css";
+import ResultByProfesion from "../components/RenderByProfesion";
 
 const ResultsByCategories = (props) => {
-  const renderByProf = renderByProfesion(props.usersInfo);
-  console.log(renderByProf);
   return (
     <div className="General--container">
-      <TitleResult title="Resultados por categoría" />
-      {renderByProf}
+      <ResultByProfesion usersInfo={props.usersInfo} />
     </div>
   );
 };
