@@ -7,6 +7,7 @@ import CalcButton from "../components/CalcButton";
 import { validateInputs } from "../utils/validateInputs";
 import { ClearInputs } from "../utils/clearInputs";
 import { Link } from "react-router-dom";
+
 import "../styles/AddPeopleInfo.css";
 
 const AddPeopleInfo = () => {
@@ -62,9 +63,7 @@ const AddPeopleInfo = () => {
 
   const handleMedicare = (medicare, newRef) => {
     refMedicare.current = newRef;
-    medicare === 0 || medicare === NaN
-      ? setMedicare([])
-      : setMedicare(medicare);
+    medicare === 0 || medicare === NaN ? setMedicare(0) : setMedicare(medicare);
   };
 
   const handlePensionFund = (pension, newRef) => {
@@ -173,14 +172,22 @@ const AddPeopleInfo = () => {
       : refInput.current.focus();
   };
 
+  const handlePatternNum = (el) => {
+    let regExp = new RegExp(/[0-9]{1,}/);
+    regExp.test(el) ? el : null;
+  };
+
+  handlePatternNum();
+
   return (
-    <div>
+    <div className="AddPeople_container">
       <AddUser
         handleUserName={handleUserName}
         handleCountry={handleCountry}
         handleProfesion={handleProfesion}
         handleUserInputFocus={handleUserInputFocus}
         setRefinput={setRefinput}
+        handlePatternNum={handlePatternNum}
       />
       <AddUserCurrencyInfo
         handleSalary={handleSalary}

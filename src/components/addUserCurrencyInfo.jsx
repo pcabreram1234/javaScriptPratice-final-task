@@ -9,90 +9,63 @@ const AddUserCurrencyInfo = ({
   handleMedicare,
   handlePensionFund,
   handleAditionalExpenxes,
+  handlePatternNum,
 }) => {
-  const getInfo = (e) => {
-    return e;
-  };
   return (
     <div className="AddUserCurrencyInfo">
-      <div className="AddUserCurrencyInfo--imageIcon">
-        <img src={addCurrencyInfoIcon} alt="" />
-      </div>
+      <input
+        type="text"
+        placeholder="Sueldo RD$..."
+        id="sueldo"
+        className="AddUserCurrencyInfo--input"
+        onChange={(e) => {
+          handlePatternNum;
+          let data = parseInt(e.currentTarget.value);
+          validateInputNumbers(e, data, handleSalary);
+        }}
+      />
 
-      <div className="AddUserCurrencyInfo--maincontainer">
-        <div className="AddUserCurrencyInfo--col">
-          <input
-            type="number"
-            placeholder="Sueldo RD$..."
-            id="sueldo"
-            className="AddUserCurrencyInfo--input"
-            onChange={(e) => {
-              let data = parseInt(e.currentTarget.value);
-              validateInputNumbers(e, data, handleSalary);
-            }}
-          />
-          <label htmlFor="Sueldo" className="AddUserCurrencyInfo--label">
-            .00
-          </label>
-        </div>
+      <input
+        type="number"
+        placeholder="Seguro Medico %"
+        id="SNS"
+        className="AddUserCurrencyInfo--input"
+        onChange={(e) => {
+          let data = parseInt(e.currentTarget.value);
+          if (validatePercent(data, 20) != 0) {
+            validateInputNumbers(e, data, handleMedicare);
+          } else {
+            handleMedicare([], e.currentTarget, handleMedicare);
+          }
+        }}
+      />
 
-        <div className="AddUserCurrencyInfo--col">
-          <input
-            type="number"
-            placeholder="Seguro Medico %"
-            id="SNS"
-            className="AddUserCurrencyInfo--input"
-            onChange={(e) => {
-              let data = parseInt(e.currentTarget.value);
-              if (validatePercent(data, 20) != 0) {
-                validateInputNumbers(e, data, handleMedicare);
-              } else {
-                handleMedicare([], e.currentTarget, handleMedicare);
-              }
-            }}
-          />
-          <label htmlFor="SNS" className="AddUserCurrencyInfo--label">
-            .00
-          </label>
-        </div>
+      <input
+        type="number"
+        placeholder="Fondo de Pensiones %"
+        id="AFP"
+        className="AddUserCurrencyInfo--input"
+        onChange={(e) => {
+          let data = parseInt(e.currentTarget.value);
 
-        <div className="AddUserCurrencyInfo--col">
-          <input
-            type="number"
-            placeholder="Fondo de Pensiones %"
-            id="AFP"
-            className="AddUserCurrencyInfo--input"
-            onChange={(e) => {
-              let data = parseInt(e.currentTarget.value);
+          if (validatePercent(data, 5) != 0) {
+            validateInputNumbers(e, data, handlePensionFund);
+          } else {
+            handleMedicare([], e.currentTarget, handlePensionFund);
+          }
+        }}
+      />
 
-              if (validatePercent(data, 5) != 0) {
-                validateInputNumbers(e, data, handlePensionFund);
-              } else {
-                handleMedicare([], e.currentTarget, handlePensionFund);
-              }
-            }}
-          />
-          <label htmlFor="AFP" className="AddUserCurrencyInfo--label">
-            .00
-          </label>
-        </div>
-
-        <div className="AddUserCurrencyInfo--col">
-          <input
-            type="number"
-            placeholder="Otros Gastos RD$"
-            id="GASTOS"
-            className="AddUserCurrencyInfo--input"
-            onChange={(e) => {
-              let data = parseInt(e.currentTarget.value);
-              validateInputNumbers(e, data, handleAditionalExpenxes);
-            }}
-          />
-          <label htmlFor="GASTOS" className="AddUserCurrencyInfo--label">
-            .00
-          </label>
-        </div>
-      </div>
+      <input
+        type="number"
+        placeholder="Otros Gastos RD$"
+        id="GASTOS"
+        className="AddUserCurrencyInfo--input"
+        onChange={(e) => {
+          let data = parseInt(e.currentTarget.value);
+          validateInputNumbers(e, data, handleAditionalExpenxes);
+        }}
+      />
     </div>
   );
 };

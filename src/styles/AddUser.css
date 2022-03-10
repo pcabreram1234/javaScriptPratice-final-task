@@ -1,43 +1,12 @@
-.AddUser--container{
-margin: 2% auto;
- width: 670.44px;
-height: 482.43px;
-background-image: url(/src/assets/images/Container1.png);
-background-size: cover;
-}
-
-.mainContainer, .mainContainer2{
-    display: grid;
-    justify-content: center;
-    grid-template-rows: 1fr;
-    grid-template-columns: 1fr 1fr;
-    padding: 0px 10%;
-}
-
-.mainContainer>:first-child{
-    display: flex;
-    flex-direction: column;
-}
-.mainContainer>:last-child{
-    display: flex;
-    justify-content: center;
-}
-
-.mainContainer .col{    
-    margin: 10px 0px;
-}
-
- input,  select{
-     height: 3rem;
-     width: 100%;
-     border-radius: 10px;
-     border: none;
-    margin: 30px 0px;
-    padding: 0px 10px;
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 
-.addUserIcon{
-    width: 92px;
-    height: 92px;
+
+.addUserIcon {
+  width: 92px;
+  height: 92px;
 }

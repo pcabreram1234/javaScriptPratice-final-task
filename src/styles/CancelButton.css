@@ -1,38 +1,28 @@
 .cancel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    width: 200px;
-    height: 60px;
-    border: none;
-    background: linear-gradient(180deg, #DBECE6 21.93%, #95B0B1 121.93%);
-    border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  width: 200px;
+  height: 60px;
+  border: none;
+  border-radius: 30px;
 }
 
-
 .cancel:enabled {
-    opacity: 1;
-    cursor: pointer;
-    display: flex;
-
+  opacity: 1;
+  cursor: pointer;
+  display: flex;
 }
 
 .cancel:disabled {
-    opacity: 0.5;
-    cursor: default;
-    display: none;
+  opacity: 0.5;
+  cursor: default;
+  display: none;
 }
-
-
-.cancel:active {
-    box-shadow: 0px 1.2px 2px 4px rgba(108, 109, 108, 0.418);
-}
-
-
 
 .cancel img {
-    width: 40px;
-    height: 40px;
-    margin: 0px 8px;
+  width: 40px;
+  height: 40px;
+  margin: 0px 8px;
 }
