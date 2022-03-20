@@ -1,7 +1,10 @@
 export const groupByProfesion = (profesion, users) => {
   const userByProfesion = [];
-  for (const user of users) {
-    user[1] === profesion ? userByProfesion.push(user) : null;
+
+  for (let i = 0; i < users.length; i++) {
+    if ((users[i].profesion === profesion)) {
+      userByProfesion.push(users[i]);
+    }
   }
   return userByProfesion;
 };

@@ -1,29 +1,18 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
+const WebPackDotEnv = require("dotenv-webpack");
+const WebpackCoppyPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
+    publicPath: "/",
   },
   resolve: {
     extensions: [".js", ".jsx"],
-    fallback: {
-      stream: false,
-      assert:false,
-      constants:false,
-      path:false,
-      os:false,
-      util:false,
-      vm:false,
-      zlib:false,
-      http:false,
-      https:false,
-      buffer:false,
-      crypto:false
-    }
   },
   module: {
     rules: [
@@ -61,5 +50,16 @@ module.exports = {
       filename: "index.html",
     }),
     new MiniCssExtractPlugin(),
+    new WebPackDotEnv(),
+    new WebpackCoppyPlugin({
+      patterns: [
+        { from: "src/json/*.json", to: "./assets/json/[name][ext]" },
+        {
+          from: path.resolve(__dirname, "public", "_redirects"),
+          force: true,
+        },
+      ],
+    }),
+    new CleanWebpackPlugin(),
   ],
 };

@@ -6,7 +6,6 @@
   width: 200px;
   height: 60px;
   border: none;
-
   border-radius: 30px;
   cursor: pointer;
 }
@@ -15,4 +14,8 @@
   width: 40px;
   height: 40px;
   margin: 0px 8px;
+}
+
+.show {
+  display: inline;
 }

@@ -20,7 +20,7 @@ const AddUser = ({
       <div className="mainContainer">
         <input
           type="text"
-          placeholde="Nombre..."
+          placeholder="Nombre..."
           autoFocus
           onLoad={(e) => {
             setRefinput(e.currentTarget);

@@ -1,43 +1,54 @@
 .card {
-    margin: 10px 10px;
-    width: 16vw;
-    height: 30vh;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-    background-color: #84DCFE;
+  margin: 10px 10px;
+  width: 323px;
+  height: 305px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  box-shadow: -1px 1px 10px 0px #00000066;
+  /*   background-color: #84dcfe; */
+}
+
+.card > span:nth-child(4) {
+  text-align: center;
 }
 
 h1,
 span {
-    color: black;
-    padding: 20px 0px;
+  color: black;
+  padding: 20px 0px;
 }
 
 hr {
-    width: 100%;
-    color: rgba(255, 255, 255, 0.582);
+  width: 100%;
+  color: rgba(255, 255, 255, 0.582);
 }
 
 .bg-green {
-
-    /*    background: linear-gradient(179.96deg, #ACF1E4 0.03%, #A6F7D6 106.91%); */
-    border-radius: 40px;
+  background: linear-gradient(179.96deg, #4d8076 0.03%, #00c9a7 106.91%);
+  border-radius: 40px;
 }
 
 .bg-blue {
-    /* background: linear-gradient(179.96deg, #7ED5E0 0.03%, #62B6DA 106.91%); */
-    border-radius: 40px;
+  background: linear-gradient(179.96deg, #7ed5e0 0.03%, #62b6da 106.91%);
+  border-radius: 40px;
 }
 
 .bg-purple {
-    /*  background: #992E9F; */
-    border-radius: 40px;
+  background: linear-gradient(179.96deg, #9b89b3 0.03%, #845ec2 106.91%);
+  border-radius: 40px;
 }
 
 .bg-orange {
-    /*  background: linear-gradient(179.95deg, #E1A173 0.04%, #E1A173 72.43%); */
-    border-radius: 40px;
+  background: linear-gradient(179.95deg, #e1a173 0.04%, #e1a173 72.43%);
+  border-radius: 40px;
+}
+
+@media (max-width: 850px) {
+  .card {
+    width: 280px;
+    height: 231px;
+  }
 }

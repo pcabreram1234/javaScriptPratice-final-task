@@ -1,18 +1,16 @@
-import React, { useRef, useState } from "react";
-import AddUser from "../components/addUser";
-import AddUserCurrencyInfo from "../components/addUserCurrencyInfo";
+import React, { useRef, useState, useEffect } from "react";
 import AddButton from "../components/addButton";
 import CancelButton from "../components/cancelButton";
-import CalcButton from "../components/CalcButton";
-import { validateInputs } from "../utils/validateInputs";
-import { ClearInputs } from "../utils/clearInputs";
-import { Link } from "react-router-dom";
-
+import useFetchApi from "../hooks/useFetchApi";
+import { onlyNumbers } from "../utils/onlyNumbers";
+import { onlyLetters } from "../utils/onlyLetters";
 import "../styles/AddPeopleInfo.css";
+import ResultByProfesion from "../components/RenderByProfesion";
+import GeneralResult from "./GeneralResults";
 
 const AddPeopleInfo = () => {
   const [usersInfo, setUsersInfo] = useState([]);
-  const [userName, setName] = useState({});
+  const [userName, setName] = useState([]);
   const [country, setCountry] = useState([]);
   const [profesion, setProfesion] = useState([]);
   const [salary, setSalary] = useState([]);
@@ -20,201 +18,225 @@ const AddPeopleInfo = () => {
   const [pensionFund, setPensionFund] = useState([]);
   const [AditionalExpenses, setAditionalExpenses] = useState([]);
 
-  const refInput = useRef(null);
-  const refCountry = useRef(null);
-  const refProfesion = useRef(null);
-  const refSalary = useRef(null);
-  const refMedicare = useRef(null);
-  const refPensionFund = useRef(null);
-  const refAditionalExpenses = useRef(null);
-  const refCancelButton = useRef(null);
+  /* Referencias */
+  const userRef = useRef();
+  const countryRef = useRef();
+  const profesionRef = useRef();
+  const medicareRef = useRef();
+  const pensionFundRef = useRef();
+  const AditionalExpensesRef = useRef();
 
-  const setRefinput = (input) => {
-    refInput.current = input;
-  };
+  /* Llamadas a API */
+  let contriesList = useFetchApi(`${process.env.API_URL}/contries.json`);
+  let profesionList = useFetchApi(`${process.env.API_URL}/profesions.json`);
 
-  const setRefCancelButton = (button) => {
-    refCancelButton.current = button;
-  };
+  /* Variables globales */
 
-  const handleUserInputFocus = () => {
-    refInput.current.focus();
-  };
+  /* Funciones manejadoras */
 
-  const handleUserName = (name, newRef) => {
-    name === "" ? setName([""]) : setName(name);
-    refInput.current = newRef;
-  };
-
-  const handleCountry = (country, newRef) => {
-    country === "" ? setCountry([""]) : setCountry(country);
-    refCountry.current = newRef;
-  };
-
-  const handleProfesion = (profesion, newRef) => {
-    profesion === "" ? setProfesion([""]) : setProfesion(profesion);
-    refProfesion.current = newRef;
-  };
-
-  const handleSalary = (salary, newRef) => {
-    refSalary.current = newRef;
-    setSalary(salary);
-  };
-
-  const handleMedicare = (medicare, newRef) => {
-    refMedicare.current = newRef;
-    medicare === 0 || medicare === NaN ? setMedicare(0) : setMedicare(medicare);
-  };
-
-  const handlePensionFund = (pension, newRef) => {
-    refPensionFund.current = newRef;
-    pension === 0 || pension === NaN
-      ? setPensionFund([])
-      : setPensionFund(pension);
-  };
-
-  const handleAditionalExpenxes = (expense, newRef) => {
-    refAditionalExpenses.current = newRef;
-    const totalMedicare = (medicare * salary) / 100;
-    const totalPensionFund = (pensionFund * salary) / 100;
-    totalMedicare + totalPensionFund + expense > salary
-      ? (alert(
-          "El total de gastos con los demás descuentos sobrepasa el salario"
-        ),
-        setAditionalExpenses([]))
-      : setAditionalExpenses(expense);
-  };
-
-  const handleUserInfo = () => {
-    if (country.length === 0 || country == "Seleccione un pais") {
-      alert("Favor de seleccionar el pais");
-      return;
-    } else if (
-      profesion.length === 0 ||
-      profesion === "Seleccionar una opción"
+  function verifyFields() {
+    const verifyProfesion = hasField("Profesion", profesionRef);
+    const verfyMedicare = hasField("Seguro Medico", medicareRef);
+    const verifypensionFund = hasField("Fondo de pensiones", pensionFundRef);
+    if (
+      verifyProfesion === 1 ||
+      verfyMedicare === 1 ||
+      verifypensionFund === 1
     ) {
-      alert("Favor de seleccionar la profesión");
-      return;
-    } else {
-      let temporalUsersInfo = [];
-      temporalUsersInfo.push(
-        userName,
-        country,
-        profesion,
-        salary,
-        medicare,
-        pensionFund,
-        AditionalExpenses
-      );
-      validateInputs(temporalUsersInfo) !== 7
-        ? alert("Faltan campos por llenar")
-        : usersInfo === []
-        ? (setUsersInfo([
-            userName,
-            profesion,
-            salary,
-            country,
-            medicare,
-            pensionFund,
-            AditionalExpenses,
-          ]),
-          ClearInputs({
-            refInput,
-            refCountry,
-            refProfesion,
-            refAditionalExpenses,
-            refMedicare,
-            refSalary,
-            refPensionFund,
-          }))
-        : setUsersInfo([
-            ...usersInfo,
-            [
-              userName,
-              profesion,
-              salary,
-              country,
-              medicare,
-              pensionFund,
-              AditionalExpenses,
-            ],
-          ]),
-        ClearInputs({
-          refInput,
-          refCountry,
-          refProfesion,
-          refAditionalExpenses,
-          refMedicare,
-          refSalary,
-          refPensionFund,
-        });
-      refCancelButton.current.disabled = false;
+      return 1;
     }
-  };
+  }
 
-  const restUsersInfo = () => {
-    let question = confirm(
-      "En verdad deseas detener el proceso de añadir más datos?"
-    );
-    question
-      ? (setUsersInfo([]),
-        ClearInputs({
-          refInput,
-          refCountry,
-          refProfesion,
-          refAditionalExpenses,
-          refMedicare,
-          refSalary,
-          refPensionFund,
-        }),
-        (refCancelButton.current.disabled = true),
-        refInput.current.focus())
-      : refInput.current.focus();
-  };
+  function verifyExpenses(refInput, dataInputed) {
+    if (parseInt(dataInputed) > parseInt(salary)) {
+      alert("Los gastos no pueden ser mayores al salario");
+      setAditionalExpenses([]);
+      refInput.current.value = "";
+    }
+  }
 
-  const handlePatternNum = (el) => {
-    let regExp = new RegExp(/[0-9]{1,}/);
-    regExp.test(el) ? el : null;
-  };
+  function sendUserInfo() {
+    if (verifyFields() !== 1) {
+      setUsersInfo([
+        ...usersInfo,
+        {
+          userName,
+          country,
+          profesion,
+          salary,
+          medicare,
+          pensionFund,
+          AditionalExpenses,
+        },
+      ]);
+      clearInputs();
+    }
+  }
 
-  handlePatternNum();
+  function hasField(field, ref) {
+    if (ref.current.options[0].selected) {
+      alert(`Favor de elegir un/una ${field}`);
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  /* Funcion que determina en los campos de seleccion si el valor inicial es 
+  el que esta seleccionadoß */
+  function resetField(ref) {
+    ref.current.options[0].selected = "selected";
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    sendUserInfo();
+  }
+
+  /* Funcion que limpia los estados y los inputs asi como los select */
+  function clearInputs() {
+    userRef.current.focus();
+    setName([]);
+    setSalary([]);
+    resetField(profesionRef);
+    setProfesion([]);
+    resetField(countryRef);
+    setCountry([]);
+    resetField(medicareRef);
+    setMedicare([]);
+    resetField(pensionFundRef);
+    setPensionFund([]);
+    setAditionalExpenses([]);
+  }
+
+  /* Renderizado */
+  useEffect(() => {
+    /* Enfoca el campo del nombre */
+    if (userRef.current) {
+      userRef.current.focus();
+    }
+  }, []);
 
   return (
     <div className="AddPeople_container">
-      <AddUser
-        handleUserName={handleUserName}
-        handleCountry={handleCountry}
-        handleProfesion={handleProfesion}
-        handleUserInputFocus={handleUserInputFocus}
-        setRefinput={setRefinput}
-        handlePatternNum={handlePatternNum}
-      />
-      <AddUserCurrencyInfo
-        handleSalary={handleSalary}
-        handleMedicare={handleMedicare}
-        handlePensionFund={handlePensionFund}
-        handleAditionalExpenxes={handleAditionalExpenxes}
-      />
-
-      <div className="buttonsContainer">
-        <AddButton handleUserInfo={handleUserInfo} />
-        <CancelButton
-          restUsersInfo={restUsersInfo}
-          setRefCancelButton={setRefCancelButton}
-        />
-        <Link
-          to={{
-            pathname: "/calc",
-            state: { usersInfo },
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Nombre..."
+          onChange={(e) => {
+            setName(onlyLetters(e));
           }}
+          value={userName}
+          ref={userRef}
+          required
+        />
+
+        <select
+          name="countriesList"
+          onChange={(e) => {
+            let countrySelected =
+              e.currentTarget.selectedOptions[0].innerHTML.toString();
+            setCountry(countrySelected);
+          }}
+          ref={countryRef}
         >
-          <CalcButton
-            usersInfo={usersInfo}
-            refInput={refInput}
-            setRefinput={setRefinput}
-          />
-        </Link>
-      </div>
+          {contriesList.length > 0 &&
+            contriesList.map((el) => {
+              return (
+                <option key={el.code} value={el.name}>
+                  {el.name}
+                </option>
+              );
+            })}
+        </select>
+
+        <select
+          name="profesionList"
+          onChange={(e) => {
+            const profesionSelected =
+              e.currentTarget.selectedOptions[0].innerHTML.toString();
+            setProfesion(profesionSelected);
+          }}
+          ref={profesionRef}
+        >
+          {profesionList.length > 0 &&
+            profesionList.map((prof) => {
+              return (
+                <option key={prof.id} value={prof.name}>
+                  {prof.name}
+                </option>
+              );
+            })}
+        </select>
+
+        <input
+          type="text"
+          placeholder="Sueldo RD$..."
+          id="sueldo"
+          className="AddUserCurrencyInfo--input"
+          onChange={(e) => {
+            setSalary(onlyNumbers(e));
+          }}
+          value={salary}
+          required
+        />
+
+        <select
+          onChange={(e) => {
+            let medicareSelected = parseInt(
+              e.currentTarget.selectedOptions[0].value
+            );
+            setMedicare(medicareSelected);
+          }}
+          ref={medicareRef}
+        >
+          <option value={0}>Seguro Medico</option>
+          <option value="21">21%</option>
+          <option value="15">15%</option>
+          <option value="10">10%</option>
+        </select>
+
+        <select
+          onChange={(e) => {
+            let pensionSelected = parseInt(
+              e.currentTarget.selectedOptions[0].value
+            );
+            setPensionFund(pensionSelected);
+          }}
+          ref={pensionFundRef}
+        >
+          <option value={0}>Fondo de pensiones</option>
+          <option value="17">17%</option>
+          <option value="15">15%</option>
+          <option value="10">10%</option>
+        </select>
+
+        <input
+          type="text"
+          placeholder="Otros Gastos RD$"
+          className="AddUserCurrencyInfo--input"
+          onChange={(e) => {
+            verifyExpenses(AditionalExpensesRef, e.currentTarget.value);
+            setAditionalExpenses(onlyNumbers(e));
+          }}
+          value={AditionalExpenses}
+          ref={AditionalExpensesRef}
+          required
+        />
+
+        <div className="buttonsContainer">
+          <AddButton />
+          <CancelButton clearInputs={clearInputs} />
+        </div>
+      </form>
+
+      <GeneralResult usersInfo={usersInfo} />
+      {usersInfo.length > 0 && (
+        <ResultByProfesion
+          usersInfo={usersInfo}
+          profesionList={profesionList}
+        />
+      )}
     </div>
   );
 };

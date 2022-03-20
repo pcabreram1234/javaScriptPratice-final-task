@@ -3,22 +3,11 @@ import cancelIcon from "../assets/images/Close.png";
 
 import "../styles/CancelButton.css";
 
-const CancelButton = ({ restUsersInfo, setRefCancelButton }) => {
+const CancelButton = ({ clearInputs }) => {
   return (
-    <button
-      onLoad={(e) => {
-        setRefCancelButton(e.currentTarget);
-        e.currentTarget.disabled = true;
-      }}
-      className="cancel"
-      onClick={() => {
-        restUsersInfo();
-      }}
-      type="button"
-      role="button"
-    >
+    <button className="cancel" type="reset" role="button" onClick={clearInputs}>
       <img src={cancelIcon} alt="" className="saveIcon" />
-      <span>Reiniciar</span>
+      <span>Limpiar</span>
     </button>
   );
 };

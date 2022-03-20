@@ -9,7 +9,9 @@
 body {
   overflow-x: hidden;
   background-image: url(../assets//images/blurry-gradient-haikei.png);
+  background-size: cover;
   background-repeat: no-repeat;
+  height: 100%;
 }
 
 .App {
@@ -76,8 +78,8 @@ button:active {
   }
 }
 
-@media (max-width: 850px) and (orientation: landscape) {
-  .App {
-    height: auto !important;
+@media (max-width: 850px) {
+  body {
+    height: 100%;
   }
 }

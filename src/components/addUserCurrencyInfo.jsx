@@ -14,14 +14,14 @@ const AddUserCurrencyInfo = ({
   return (
     <div className="AddUserCurrencyInfo">
       <input
-        type="text"
+        type="number"
         placeholder="Sueldo RD$..."
         id="sueldo"
         className="AddUserCurrencyInfo--input"
         onChange={(e) => {
-          handlePatternNum;
           let data = parseInt(e.currentTarget.value);
           validateInputNumbers(e, data, handleSalary);
+          handlePatternNum(e.currentTarget.value);
         }}
       />
 

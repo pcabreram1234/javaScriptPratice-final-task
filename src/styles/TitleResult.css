@@ -1,31 +1,43 @@
 .titleResult--container {
-    width: 100%;
-    position: relative;
+  width: 100%;
+  position: relative;
 }
 
 .Background {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 5rem;
-    background-color: #AA8B71;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 5rem;
+  background-color: #aa8b71;
 }
 
 .titleResult--container__h1 {
-    position: absolute;
-    left: 80px;
-    top: 0px;
-    text-align: center;
-    display: contents;
+  position: absolute;
+  left: 80px;
+  top: 0px;
+  text-align: center;
+  display: contents;
+}
+.AddUserCurrencyInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .BackIcon {
-    position: absolute;
-    left: 10px;
-    top: 5px;
+  position: absolute;
+  left: 10px;
+  top: 5px;
 }
 
 .BackIcon:hover {
-    background-color: white;
+  background-color: white;
+}
+
+@media (max-width: 850px) {
+  .Background {
+    text-align: center;
+  }
 }
