@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open --mode development",
-    "build": "webpack --mode production --config webpack.config.js",
+    "build": "node ./scripts/create-env.js && webpack --mode production --config webpack.config.js",
     "server": "json-server --watch ./src/utils/plantsBd.json"
   },
   "repository": {
